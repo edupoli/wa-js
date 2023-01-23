@@ -1,0 +1,20 @@
+name: Update Fork
+on:
+  schedule:
+    - cron: '0 6 * * *'
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Update Fork
+      run: |
+        git remote add upstream https://github.com/wppconnect-team/wa-js.git
+        git fetch upstream
+        git rebase upstream/master
+    - name: Commit and Push
+      run: |
+        git config --global user.email "eduardopolicarpo@gmail.com"
+        git config --global user.name "edupoli"
+        git add .
+        git commit -m "Update Fork"
+        git push
